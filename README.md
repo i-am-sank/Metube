@@ -1,4 +1,4 @@
-![MeTube](src/Metubelogo.png)
+![MeTube](src/metube.png)
 
 
 A video streaming Decentralised Application powered by IPFS. 
