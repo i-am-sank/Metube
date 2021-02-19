@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DVideo from '../abis/DVideo.json'
-import Navbar from './Navbar'
+import MTNavbar from './Navbar'
 import Main from './Main'
 import Web3 from 'web3';
 import './App.css';
@@ -65,20 +65,7 @@ class App extends Component {
     else {
       window.alert('DVideo contract not deployed to detected network.')
     }
-    //Check if net data exists, then
-      //Assign dvideo contract to a variable
-      //Add dvideo to the state
 
-      //Check videoAmounts
-      //Add videAmounts to the state
-
-      //Iterate throught videos and add them to the state (by newest)
-
-
-      //Set latest video and it's title to view as default 
-      //Set loading state to false
-
-      //If network data doesn't exisits, log error
   }
 
   //Get video
@@ -134,7 +121,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar 
+        <MTNavbar 
           //Account
           account = {this.state.account}
         />
