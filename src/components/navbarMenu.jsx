@@ -9,12 +9,11 @@ export default class NavbarMenu extends Component {
         const {isopen} = this.props;
 
         return (
-           <div classname={'navbar-menu'} style={{top:(isopen? 0:'-100%')}}>
-              <div style={{height: '100%'}}>
+           <div>
+              <div>
                  <Container style={{flexDirection: 'column'}}>
-                        <Row className={'navbar-menu-row'}>
-                            <Col lg={4} className={'navbar-link'} style={{
-                                top: (isopen ? 0 : 80),
+                        <Row>
+                            <Col lg={4} style={{
                                 opacity: (isopen ? 1 : 0),
                                 transitionDelay: '0.5s'
                             }}>Home</Col>
