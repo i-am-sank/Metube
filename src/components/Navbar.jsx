@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
-import metube from '../metube.png';
+import metube from '../../public/logo/metube.png';
 import {Navbar, Button, Nav, Form, FormControl, Container, Row} from "react-bootstrap";
 //import NavbarMenu from "./navbarMenu";
 import './App.css';
@@ -25,7 +25,7 @@ class MTNavbar extends Component {
 
     return (
       <div style = {{marginBottom:"4em"}}>
-          <Navbar bg="light" variant="light" expand="lg" fixed="top">
+          <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
              <img src={metube} width="75" height="50" className="d-inline-block align-top" alt="Metube" />
              <Navbar.Toggle aria-controls="basic-navbar-nav" />
              <Navbar.Collapse id="basic-navbar-nav">

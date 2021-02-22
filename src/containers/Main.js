@@ -4,7 +4,7 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="container-fluid text-monospace bg-gray">
+      <div className="container-fluid text-monospace bg-light">
       <br></br>
       &nbsp;
       <br></br>
