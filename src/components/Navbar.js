@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
-import metube from '../../public/logo/metube.png';
+import metube from './metube.png';
 import {Navbar, Button, Nav, Form, FormControl, Container, Row} from "react-bootstrap";
-//import NavbarMenu from "./navbarMenu";
-import './App.css';
 
 class MTNavbar extends Component {
   constructor(props) {
@@ -13,25 +11,18 @@ class MTNavbar extends Component {
     };
   }
 
-  toggleNav = () => {
-    //console.log('yes');
-     this.setState({
-       isNavopen: !(this.state.isNavopen)
-     });
-  }
-
   render() {
     const {isNavopen} = this.state;
 
     return (
       <div style = {{marginBottom:"4em"}}>
-          <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+          <Navbar bg="light" variant="light" expand="lg" fixed="top">
              <img src={metube} width="75" height="50" className="d-inline-block align-top" alt="Metube" />
              <Navbar.Toggle aria-controls="basic-navbar-nav" />
              <Navbar.Collapse id="basic-navbar-nav">
-               <Nav className="mr-auto">
-                 <Nav.Link href="#home">Home</Nav.Link>
-                 <Nav.Link href="#link">About</Nav.Link>
+               <Nav className="mr-auto" activeKey="/" onSelect={(selectedKey)=> {alert(`selected ${selectedKey}`)}}>
+                 <Nav.Link href="">Home</Nav.Link>
+                 <Nav.Link eventKey="#Main">About</Nav.Link>
                </Nav>
                <Form inline>
                  <FormControl type="text" placeholder="Search" className="mr-sm-2" />
