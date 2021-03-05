@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) 
@@ -10,8 +11,8 @@ class Main extends Component {
     this.state = {
       buffer: null,
       loading : false,
-      currentHash: this.props.currentHash,
-      currentTitle: this.props.currentTitle
+      currentHash: this.props.hash,
+      currentTitle: null
     }
    } 
 
@@ -36,7 +37,7 @@ class Main extends Component {
  
          }
          this.setState({loading: true})
-         this.state.dvideo.methods.uploadVideo(result[0].hash, title).send({ from: this.state.account }).on('transactionHash', (hash) => {
+         this.props.dvideo.methods.uploadVideo(result[0].hash, title).send({ from: this.props.account }).on('transactionHash', (hash) => {
            this.setState({loading:false})
          })
       })
@@ -44,7 +45,6 @@ class Main extends Component {
  
    //Change Video
    changeVideo = (hash, title) => {
-      console.log(title,hash);
         this.setState({
          'currentHash': hash,
          'currentTitle': title
@@ -89,9 +89,9 @@ class Main extends Component {
               <button type="submit" className="btn btn-danger btn-block btn-sm">Upload!</button>
               &nbsp;
             </form>
-              {this.props.videos.map((video, key) => {
+              {this.props.videos.map((video) => {
                 return (
-                <div className="card mb-4 text-center bg-secondary mx-auto" style={{ width: '175px'}}>
+                <div className="card mb-4 text-center bg-secondary mx-auto" style={{ width: '200px'}}>
                 <div className="card-title bg-dark">
                   <small className="text-white"><b>{video.title}</b></small>
                 </div>
@@ -99,7 +99,7 @@ class Main extends Component {
                      <p onClick={ () => this.changeVideo(video.hash, video.title)}>
                        <video
                           src={`https://ipfs.infura.io/ipfs/${video.hash}`}
-                          style = {{ width: '150px'}}
+                          style = {{ width: '175px', height: '100px'}}
                        ></video>
                      </p>
                   </div>
@@ -114,4 +114,12 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+      videos: state.videos,
+      dvideo: state.dvideo,
+      acccount: state.account
+  }
+}
+
+export default connect(mapStateToProps)(Main);

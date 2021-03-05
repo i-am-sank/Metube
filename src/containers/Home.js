@@ -1,54 +1,40 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {Jumbotron} from 'react-bootstrap';
 
 class Homepage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data:null
-        }
-    }
-
-    componentDidMount = async() => {
-        let data = this.props.videos.map((video,key)=>{
-            return <div className="card mb-4 text-center bg-secondary mx-auto" style={{ width: '175px'}}>
-                        <div className="card-title bg-dark">
-                        <small className="text-white"><b>{video.title}</b></small>
-                        </div>
-                        <div>
-                            <p onClick={ () => this.changePage(video.hash,video.title)}>
-                            <video
-                                src={`https://ipfs.infura.io/ipfs/${video.hash}`}
-                                style = {{ width: '150px'}}
-                            ></video>
-                            </p>
-                        </div>
-                    </div>
-        });
-        this.setState({data:data});
-    }
     
-    changePage = (Hash,Title) => {
-        console.log(Title);
-        //this.props.currentHash = Hash;
-        //this.props.currentTitle = Title;
-        //this.props.isHome = !(this.props.isHome);
-       // console.log(this.props.currentTitle);
+    changePage = (Hash) => {
+        window.location.href = `http://localhost:3000/Main/${Hash}`;
     }
 
     render (){
         return (
-            <div >
-                <section class="wrapper">
-                <div class="container-fostrap text-center">
-                    <div>
-                        <h1 class="heading">
-                            Homepage
-                        </h1>
-                    </div>
-                    <div class="content">
-                        <div class="container">
-                            <div class="row">
-                            {this.state.data}
+            <div>
+                <section className="wrapper">
+                <div className="container-fostrap text-center">
+                    <Jumbotron>
+                    <h3 className="text-primary">Welcome To MeTube</h3>
+                    <h5 className="text-dark"> Binge watch your favourites videos, Happy watching :)</h5> 
+                    </Jumbotron>
+                    <div className="content">
+                        <div className="container">
+                            <div className="row">
+                            {this.props.videos.map((video,key)=>{
+                             return (<div className="card mb-4 text-center bg-secondary mx-auto" style={{ width: '200px'}}>
+                            <div className="card-title bg-dark">
+                            <small className="text-white"><b>{video.title}</b></small>
+                            </div>
+                            <div>
+                                <p onClick={ () => this.changePage(video.hash)}>
+                                <video
+                                    src={`https://ipfs.infura.io/ipfs/${video.hash}`}
+                                    style = {{ width: '175px', height: '100px'}}
+                                ></video>
+                                </p>
+                            </div>
+                        </div>
+                        )}) }
                             </div>
                         </div>
                     </div>
@@ -59,4 +45,10 @@ class Homepage extends React.Component {
     }
 }
 
-export default Homepage;
+const mapStateToProps = (state) => {
+    return {
+        videos: state.videos
+    }
+}
+
+export default connect(mapStateToProps)(Homepage);

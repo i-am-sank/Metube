@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router } from "react-router-dom";
+import BaseRouter from "./routes";
 import DVideo from './abis/DVideo.json';
 import CustomLayout from './containers/Layout';
 import Web3 from 'web3';
+import {connect} from 'react-redux';
 
-//Declare IPFS
-const ipfsClient = require('ipfs-http-client')
-const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) 
 
 class App extends Component {
 
-  async componentWillMount() {
-    await this.loadWeb3()
-    await this.loadBlockchainData()
+  async componentDidMount() {
+    await this.loadWeb3();
+    await this.loadBlockchainData();
+    this.props.AddData(this.state.dvideo, this.state.videos, this.state.account, this.state.currentHash);
   }
 
   async loadWeb3() {
@@ -42,7 +43,6 @@ class App extends Component {
       this.setState({dvideo})
 
       const videoCount = await dvideo.methods.videoCount().call()
-      this.setState({ videoCount })
 
       for( var i=videoCount; i>=1;i--){
         const video = await dvideo.methods.videos(i).call()
@@ -51,11 +51,11 @@ class App extends Component {
         })
       }
       
-      // const latest = await dvideo.methods.videos(videoCount).call()
-      // this.setState({
-      //   currentHash: latest.hash,
+       const latest = await dvideo.methods.videos(videoCount).call()
+       this.setState({
+         currentHash: latest.hash,
       //   currentTitle: latest.title
-      // })
+       })
       this.setState({
         loading: false
       })
@@ -65,30 +65,35 @@ class App extends Component {
     }
 
   }
-
-  constructor(props) {
-   super(props)
-   this.state = {
-     account: '',
-     dvideo: null,
-     videos: [],
-     loading : true,
-     Hash: null,
-     Title: null
-   }
-  }
   
+  constructor(props){
+    super(props);
+    this.state = {
+      account:'',
+      loading:true,
+      dvideo:null,
+      videos:[],
+      currentHash:null,
+    }
+  }
+
   render() {
     return (
-          <CustomLayout  
-          account={this.state.account}
-          videos={this.state.videos}
-          loading={this.state.loading}
-          currentHash={this.state.Hash}
-          currentTitle={this.state.Title}
-          />          
+          <> 
+            <Router>
+               <CustomLayout  {...this.props}>
+                <BaseRouter/>
+              </CustomLayout>
+            </Router>
+          </>         
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    AddData: (dvideo,videos,account,hash) => { dispatch({type:'ADD_DATA', dvideo:dvideo, videos:videos, account: account, latestHash:hash }) }
+  } 
+}
+
+export default connect(null, mapDispatchToProps)(App);

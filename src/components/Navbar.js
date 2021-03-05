@@ -2,17 +2,11 @@ import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 import metube from './metube.png';
 import {Navbar, Button, Nav, Form, FormControl, Container, Row} from "react-bootstrap";
+import {connect} from 'react-redux';
 
 class MTNavbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isNavopen: false
-    };
-  }
-
+  
   render() {
-    const {isNavopen} = this.state;
 
     return (
       <div style = {{marginBottom:"4em"}}>
@@ -20,9 +14,10 @@ class MTNavbar extends Component {
              <img src={metube} width="75" height="50" className="d-inline-block align-top" alt="Metube" />
              <Navbar.Toggle aria-controls="basic-navbar-nav" />
              <Navbar.Collapse id="basic-navbar-nav">
-               <Nav className="mr-auto" activeKey="/" onSelect={(selectedKey)=> {alert(`selected ${selectedKey}`)}}>
-                 <Nav.Link href="">Home</Nav.Link>
-                 <Nav.Link eventKey="#Main">About</Nav.Link>
+               <Nav className="mr-auto">
+                 <Nav.Link href="/">Home</Nav.Link>
+                 <Nav.Link href="#About">About</Nav.Link>
+                 <Nav.Link href={`/Main/${this.props.latestHash}`}>Latest</Nav.Link>
                </Nav>
                <Form inline>
                  <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -49,4 +44,12 @@ class MTNavbar extends Component {
   }
 }
 
-export default MTNavbar;
+const mapStateToProps = (state) => {
+  return {
+    account: state.account,
+    latestHash: state.latestHash
+  }
+}
+
+export default connect(mapStateToProps)(MTNavbar);
+
