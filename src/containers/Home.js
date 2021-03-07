@@ -28,6 +28,7 @@ class Homepage extends React.Component {
                             <div>
                                 <p onClick={ () => this.changePage(video.hash,video.title)}>
                                 <video
+                                    className="bg-dark"
                                     src={`https://ipfs.infura.io/ipfs/${video.hash}`}
                                     style = {{ width: '175px', height: '100px'}}
                                 ></video>

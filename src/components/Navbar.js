@@ -9,7 +9,7 @@ class MTNavbar extends Component {
   render() {
 
     return (
-      <div style = {{marginBottom:"4.5em"}}>
+      <div style = {{marginBottom:"4em"}}>
           <Navbar bg="light" variant="light" expand="lg" fixed="top">
              <img src={metube} width="85" height="55" className="d-inline-block align-top" alt="Metube" />
              <Navbar.Toggle aria-controls="basic-navbar-nav" />

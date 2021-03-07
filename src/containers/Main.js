@@ -23,7 +23,6 @@ class Main extends Component {
        });
    }
   
-
   render() {
     return (
       <div className="container-fluid text-monospace bg-light">

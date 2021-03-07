@@ -38,15 +38,16 @@ class VUpload extends React.Component {
             const postResp = await ipfs.add(data);
              console.log('response: ',postResp); 
               this.props.dvideo.methods.uploadVideo(postResp[0].hash, title).send({ from: this.props.account }).on('transactionHash', (hash) => {
-                this.setState({loading:false})
+                this.setState({loading:false});
+                alert('Video File uploaded SuccessFully!');
+                window.location.reload();
               })
-          alert('File uploaded SuccessFully!');
+          
           }catch(e){
             console.log("error: ",e);
           }
         }
         else{
-          console.log('No file submitted');
           alert('No file submitted. Please try again.');
         }
       }
