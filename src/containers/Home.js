@@ -4,8 +4,8 @@ import {Jumbotron} from 'react-bootstrap';
 
 class Homepage extends React.Component {
     
-    changePage = (Hash) => {
-        window.location.href = `http://localhost:3000/Main/${Hash}`;
+    changePage = (Hash,Title) => {
+        window.location.href = `http://localhost:3000/Main/${Hash}/${Title}`;
     }
 
     render (){
@@ -14,8 +14,8 @@ class Homepage extends React.Component {
                 <section className="wrapper">
                 <div className="container-fostrap text-center">
                     <Jumbotron>
-                    <h3 className="text-primary">Welcome To MeTube</h3>
-                    <h5 className="text-dark"> Binge watch your favourites videos, Happy watching :)</h5> 
+                    <h4 className="text-primary">Welcome To MeTube !!</h4>
+                    <h6 className="text-dark"> Binge watch your favourites videos, Happy watching :)</h6> 
                     </Jumbotron>
                     <div className="content">
                         <div className="container">
@@ -26,7 +26,7 @@ class Homepage extends React.Component {
                             <small className="text-white"><b>{video.title}</b></small>
                             </div>
                             <div>
-                                <p onClick={ () => this.changePage(video.hash)}>
+                                <p onClick={ () => this.changePage(video.hash,video.title)}>
                                 <video
                                     src={`https://ipfs.infura.io/ipfs/${video.hash}`}
                                     style = {{ width: '175px', height: '100px'}}

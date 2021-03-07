@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Jumbotron} from 'react-bootstrap';
 
-const ipfsClient = require('ipfs-http-client')
-const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) 
 
 class Main extends Component {
   
@@ -12,37 +11,10 @@ class Main extends Component {
       buffer: null,
       loading : false,
       currentHash: this.props.hash,
-      currentTitle: null
+      currentTitle: this.props.title
     }
    } 
-
-    //Get video
-    captureFile = event => {
-      event.preventDefault()
-      const file  = event.target.files[0]
-      const reader = new window.FileReader()
-      reader.readAsArrayBuffer(file)
- 
-      reader.onloadend = () => {
-        this.setState({buffer: Buffer(reader.result)})
-      }
-   }
- 
-   //Upload video
-   uploadVideo = title => {
-      ipfs.add(this.state.buffer, (error, result) => {
-         if(error){
-           console.log(error);
-           return
- 
-         }
-         this.setState({loading: true})
-         this.props.dvideo.methods.uploadVideo(result[0].hash, title).send({ from: this.props.account }).on('transactionHash', (hash) => {
-           this.setState({loading:false})
-         })
-      })
-   }
- 
+  
    //Change Video
    changeVideo = (hash, title) => {
         this.setState({
@@ -62,33 +34,14 @@ class Main extends Component {
           <div className="col-md-10">
             <div className="embed-responsive embed-responsive-16by9" style={{ maxHeight: '768px'}}>
               <video
+                 className="bg-dark"
                  src={`https://ipfs.infura.io/ipfs/${this.state.currentHash}`}
                  controls
               ></video>  
             </div>
-            <h3>{this.state.currentTitle}</h3>
+            <Jumbotron><h4>{this.state.currentTitle}</h4></Jumbotron>
           </div>
           <div className="col-md-2 overflow-auto text-center" style={{ maxHeight: '768px', minWidth: '175px' }}>
-            <h5><b>Share Video</b></h5>
-            <form onSubmit={(event) => {
-              event.preventDefault()
-              const title  = this.videoTitle.value
-              this.uploadVideo(title)
-             }} >
-              &nbsp;
-              <input type='file' accept=".mp4, .mkv, .ogg, .wmv" onChange={this.captureFile} style={{width: '250px'}} />
-              <div className="form-group mr-sm-2">
-                <input 
-                id="videoTitle"
-                type="text"
-                className="form-control-sm"
-                placeholder="Title.."
-                ref={(input) => {this.videoTitle = input}}
-                required />
-              </div>
-              <button type="submit" className="btn btn-danger btn-block btn-sm">Upload!</button>
-              &nbsp;
-            </form>
               {this.props.videos.map((video) => {
                 return (
                 <div className="card mb-4 text-center bg-secondary mx-auto" style={{ width: '200px'}}>
@@ -98,6 +51,7 @@ class Main extends Component {
                   <div>
                      <p onClick={ () => this.changeVideo(video.hash, video.title)}>
                        <video
+                          className="bg-dark"
                           src={`https://ipfs.infura.io/ipfs/${video.hash}`}
                           style = {{ width: '175px', height: '100px'}}
                        ></video>
@@ -116,9 +70,7 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      videos: state.videos,
-      dvideo: state.dvideo,
-      acccount: state.account
+      videos: state.videos
   }
 }
 

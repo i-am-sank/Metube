@@ -9,15 +9,16 @@ class MTNavbar extends Component {
   render() {
 
     return (
-      <div style = {{marginBottom:"4em"}}>
+      <div style = {{marginBottom:"4.5em"}}>
           <Navbar bg="light" variant="light" expand="lg" fixed="top">
-             <img src={metube} width="75" height="50" className="d-inline-block align-top" alt="Metube" />
+             <img src={metube} width="85" height="55" className="d-inline-block align-top" alt="Metube" />
              <Navbar.Toggle aria-controls="basic-navbar-nav" />
              <Navbar.Collapse id="basic-navbar-nav">
                <Nav className="mr-auto">
                  <Nav.Link href="/">Home</Nav.Link>
-                 <Nav.Link href="#About">About</Nav.Link>
-                 <Nav.Link href={`/Main/${this.props.latestHash}`}>Latest</Nav.Link>
+                 <Nav.Link href={`/Main/${this.props.latestHash}/${this.props.latestTitle}`}>Latest</Nav.Link>
+                 <Nav.Link href="/Main/upload">Upload</Nav.Link>
+                 <Nav.Link href="#About">About</Nav.Link>   
                </Nav>
                <Form inline>
                  <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -28,10 +29,10 @@ class MTNavbar extends Component {
                    <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
                      <Container fluid>
                        <Row>
-                       <h5><small className="text-secondary">
+                       <h5><small className="text-secondary text-center">
                        <small id="account">{this.props.account}</small>
                      </small></h5>
-                      { this.props.account ? <img className='ml-2' width='30' height='30' src = {`data:image/png;base64,${new Identicon(this.props.account,30).toString()}`}/> : <span></span>}
+                      { this.props.account ? <img className='ml-2' width='35' height='35' src = {`data:image/png;base64,${new Identicon(this.props.account,30).toString()}`}/> : <span></span>}
                        </Row>
                      </Container>
                    </li>
@@ -47,7 +48,8 @@ class MTNavbar extends Component {
 const mapStateToProps = (state) => {
   return {
     account: state.account,
-    latestHash: state.latestHash
+    latestHash: state.latestHash,
+    latestTitle: state.latestTitle
   }
 }
 

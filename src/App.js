@@ -12,7 +12,7 @@ class App extends Component {
   async componentDidMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
-    this.props.AddData(this.state.dvideo, this.state.videos, this.state.account, this.state.currentHash);
+    this.props.AddData(this.state.dvideo, this.state.videos, this.state.account, this.state.currentHash, this.state.currentTitle);
   }
 
   async loadWeb3() {
@@ -54,7 +54,7 @@ class App extends Component {
        const latest = await dvideo.methods.videos(videoCount).call()
        this.setState({
          currentHash: latest.hash,
-      //   currentTitle: latest.title
+         currentTitle: latest.title
        })
       this.setState({
         loading: false
@@ -74,6 +74,7 @@ class App extends Component {
       dvideo:null,
       videos:[],
       currentHash:null,
+      currentTitle:null
     }
   }
 
@@ -92,7 +93,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    AddData: (dvideo,videos,account,hash) => { dispatch({type:'ADD_DATA', dvideo:dvideo, videos:videos, account: account, latestHash:hash }) }
+    AddData: (dvideo,videos,account,hash,title) => { dispatch({type:'ADD_DATA', dvideo:dvideo, videos:videos, account: account, latestHash:hash, latestTitle:title}) }
   } 
 }
 

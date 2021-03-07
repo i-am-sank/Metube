@@ -4,6 +4,7 @@ const initState = {
     videos: [],
     loading : true,
     latestHash: null,
+    latestTitle:null
 }
 
 const rootreducer = (state = initState,action) => {
@@ -13,7 +14,8 @@ const rootreducer = (state = initState,action) => {
             videos:action.videos,
             dvideo:action.dvideo,
             account:action.account,
-            latestHash:action.latestHash
+            latestHash:action.latestHash,
+            latestTitle:action.latestTitle
         }
     }
     return state;
