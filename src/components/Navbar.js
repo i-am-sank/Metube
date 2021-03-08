@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
-import metube from './metube.png';
+import metube from '../img/metube.png';
 import {Navbar, Button, Nav, Form, FormControl, Container, Row} from "react-bootstrap";
 import {connect} from 'react-redux';
 

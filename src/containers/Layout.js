@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, Segment} from "semantic-ui-react";
 import {Row, Col} from 'react-bootstrap';
 import MTNavbar from '../components/Navbar';
+import bgImg from '../img/dark.jpg'
 
 class CustomLayout extends React.Component {
 
@@ -14,18 +15,17 @@ class CustomLayout extends React.Component {
                    {this.props.children}
                   </div>
                   
-                  <Segment className="bg-dark p-3">
+                  <Segment className="bg-dark p-5" style={{backgroundImage: `url(${bgImg})`}}>
                      <Container className="text-center text-light">
-                        <p>Powered by <i class="bi bi-hexagon-fill"></i> IPFS</p>
-                        <p>____________________________________________________________________</p>
+                        <p>Powered  by  <i className="bi bi-hexagon-fill"></i> IPFS</p>
+                        <p>_____________________________________________________</p>
                         <Row>
-                            <Col xs={3}></Col>
-                            <b>Contact Me:</b>
-                            <Col><a href=""><i className="bi bi-linkedin"></i></a></Col>
-                            <Col><a href=""><i class="bi bi-google"></i></a></Col>
-                            <Col><a href=""><i class="bi bi-github"></i></a></Col>
-                            <Col><a href=""><i class="bi bi-instagram"></i></a></Col>
-                            <Col xs={3}></Col>
+                            <Col xs={4}></Col>
+                            <Col><a href="https://www.linkedin.com/in/sankalp-gupta-42b84118a/"><i className="bi bi-linkedin"></i></a></Col>
+                            <Col><a href=""><i className="bi bi-google"></i></a></Col>
+                            <Col><a href="https://github.com/i-am-sank"><i className="bi bi-github"></i></a></Col>
+                            <Col><a href="https://www.instagram.com/_the.lone.wolf__/"><i className="bi bi-instagram"></i></a></Col>
+                            <Col xs={4}></Col>
                         </Row>
                      </Container>
                   </Segment>

@@ -57,7 +57,7 @@ class VUpload extends React.Component {
             <div className="container text-center p-5">
                 <Row>
                     <Col></Col>
-                    <Col xs={6} className="card p-3">
+                    <Col xs={6} className="card p-4">
                         <h5 className="card-title"><b>Share Video</b></h5>
                         <Form onSubmit={(event) => {
                         event.preventDefault()
