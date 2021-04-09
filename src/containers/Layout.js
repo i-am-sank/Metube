@@ -22,7 +22,6 @@ class CustomLayout extends React.Component {
                         <Row>
                             <Col xs={4}></Col>
                             <Col><a href="https://www.linkedin.com/in/sankalp-gupta-42b84118a/"><i className="bi bi-linkedin"></i></a></Col>
-                            <Col><a href=""><i className="bi bi-google"></i></a></Col>
                             <Col><a href="https://github.com/i-am-sank"><i className="bi bi-github"></i></a></Col>
                             <Col><a href="https://www.instagram.com/_the.lone.wolf__/"><i className="bi bi-instagram"></i></a></Col>
                             <Col xs={4}></Col>

@@ -10,7 +10,7 @@ class MTNavbar extends Component {
 
     return (
       <div style = {{marginBottom:"4em"}}>
-          <Navbar bg="light" variant="light" expand="lg" fixed="top">
+          <Navbar bg="white" variant="light" expand="lg" fixed="top">
              <img src={metube} width="85" height="55" className="d-inline-block align-top" alt="Metube" />
              <Navbar.Toggle aria-controls="basic-navbar-nav" />
              <Navbar.Collapse id="basic-navbar-nav">
@@ -27,7 +27,7 @@ class MTNavbar extends Component {
                <div className="justify-content-end navbar-logo">
                  <ul className="navbar-nav px-3">
                    <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-                     <Container fluid>
+                     <Container fluid className="p-2">
                        <Row>
                        <h5><small className="text-secondary text-center">
                        <small id="account">{this.props.account}</small>
